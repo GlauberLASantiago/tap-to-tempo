@@ -3,53 +3,134 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Identificador de Andamento — Tap BPM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700;800&display=swap');
-:root{color-scheme:dark;--bg:#0b1020;--panel:#151d32;--border:#2b3651;--txt:#f4f7ff;--muted:#9caecb;--accent:#7daaff;--good:#74e0b1}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#1c3156 0%,var(--bg) 55%);color:var(--txt);font-family:Inter,Arial,sans-serif;display:grid;place-items:center;padding:24px}
-.app{width:min(100%,650px)}.top{text-align:center;margin-bottom:25px}.eyebrow{letter-spacing:.18em;color:var(--accent);font-size:12px;font-weight:700;text-transform:uppercase}.top h1{font:700 clamp(25px,5vw,37px)/1.2 Lexend,Arial,sans-serif;margin:12px 0}.top p{color:var(--muted);line-height:1.6;margin:0}
-.panel{background:rgba(21,29,50,.96);border:1px solid var(--border);border-radius:26px;padding:clamp(20px,5vw,38px);box-shadow:0 28px 70px #0005;text-align:center}
-.reading-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}.readout{display:flex;align-items:baseline;justify-content:center;gap:13px;margin:13px 0 0}.number{font:800 clamp(86px,19vw,142px)/1 Lexend,Arial,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.07em}.unit{font:700 23px Lexend;color:var(--accent)}
-.tempo{min-height:24px;color:var(--muted);margin:6px 0 25px}.pad{width:100%;height:154px;border:2px solid #4a6aa4;background:linear-gradient(150deg,#264471,#1c3158);border-radius:20px;color:#f7f9ff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;touch-action:manipulation;user-select:none;transition:background .09s,transform .09s,border-color .09s}.pad .pad-title{font:700 clamp(19px,4vw,26px) Lexend}.pad small{color:#c8d8f4;font-size:13px}.pad:focus-visible,.reset:focus-visible{outline:3px solid #a9c8ff;outline-offset:4px}.pad.active{transform:scale(.985);background:#3565ac;border-color:#b7d3ff}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.stat{border:1px solid var(--border);background:#11192b;border-radius:14px;padding:16px 10px}.stat strong{display:block;font:700 19px Lexend;margin-top:7px}.stat span{font-size:12px;color:var(--muted)}.reset{margin-top:23px;padding:12px 28px;border:1px solid #52617b;border-radius:12px;background:transparent;color:white;cursor:pointer;font:600 14px Inter}.reset:hover{background:#27334c}.help{text-align:center;color:var(--muted);font-size:12px;line-height:1.7;margin-top:22px}kbd{border:1px solid #52617b;border-bottom-width:3px;padding:2px 7px;border-radius:5px;color:#e2ebff;background:#1a253d}.live-dot{display:inline-block;width:8px;height:8px;background:var(--good);border-radius:50%;margin-right:5px}.live-dot.off{background:#73829c}@media(max-width:400px){.stats{gap:8px}.panel{padding:19px}.stat{padding:13px 8px}}
+:root{
+  --font-title:'Playfair Display',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;
+  --blue:#4682B4;--red:#CD5C5C;--wheat:#F5DEB3;--brown:#8B4513;--slate:#2F4F4F;
+}
+h1,h2,h3,h4{font-family:var(--font-title)}
+body,p,span,a,input,button,small,strong,output,label,div{font-family:var(--font-body)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--wheat);display:grid;place-items:center;padding:24px;
+  background:linear-gradient(rgba(47,79,79,.62),rgba(47,79,79,.82)),url('https://raw.githubusercontent.com/GlauberLASantiago/gl-cores-fontes-e-fundos/main/musica/10_realista_violao_folk_acustico.png') center/cover fixed no-repeat var(--slate)}
+.app{width:min(100%,650px)}
+.top{text-align:center;margin-bottom:25px}
+.eyebrow{letter-spacing:.2em;color:var(--red);font-size:12px;font-weight:600;text-transform:uppercase}
+.top h1{font-weight:700;font-size:clamp(28px,5.5vw,42px);line-height:1.2;margin:12px 0;color:var(--wheat)}
+.top p{color:var(--wheat);opacity:.85;line-height:1.6;margin:0}
+.panel{background:rgba(47,79,79,.92);border:1px solid var(--brown);border-radius:26px;padding:clamp(20px,5vw,38px);box-shadow:0 28px 70px #0008;text-align:center;backdrop-filter:blur(4px)}
+.reading-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--wheat);opacity:.75;font-weight:600}
+.readout{display:flex;align-items:baseline;justify-content:center;gap:13px;margin:13px 0 0}
+.number{font-family:var(--font-title);font-weight:800;font-size:clamp(86px,19vw,142px);line-height:1;font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.04em}
+.unit{font-family:var(--font-title);font-weight:700;font-size:23px;color:var(--red)}
+.tempo{min-height:24px;color:var(--wheat);opacity:.8;margin:6px 0 25px}
+.pad{width:100%;height:154px;border:2px solid var(--wheat);background:var(--blue);border-radius:20px;color:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;touch-action:manipulation;user-select:none;transition:background .09s,transform .09s}
+.pad .pad-title{font-weight:600;font-size:clamp(18px,4vw,24px)}
+.pad small{color:var(--wheat);font-size:13px}
+.pad:focus-visible,.reset:focus-visible,.mic:focus-visible,.opt input:focus-visible{outline:3px solid var(--wheat);outline-offset:4px}
+.pad.active{transform:scale(.985);background:var(--red)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.stat{border:1px solid var(--brown);background:rgba(0,0,0,.25);border-radius:14px;padding:16px 10px}
+.stat strong{display:block;font-weight:600;font-size:18px;margin-top:7px}
+.stat span{font-size:12px;opacity:.75}
+.options{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px}
+.opt{display:flex;align-items:center;gap:9px;padding:11px 16px;border:1px solid var(--brown);border-radius:12px;background:rgba(0,0,0,.25);cursor:pointer;font-size:14px;font-weight:500}
+.opt input{width:18px;height:18px;accent-color:var(--red)}
+.mic{padding:11px 18px;border:1px solid var(--wheat);border-radius:12px;background:transparent;color:var(--wheat);cursor:pointer;font-size:14px;font-weight:600}
+.mic.on{background:var(--red);border-color:var(--red);color:#fff}
+.meter{height:6px;border-radius:3px;background:rgba(0,0,0,.35);margin-top:14px;overflow:hidden;display:none}
+.meter.show{display:block}.meter i{display:block;height:100%;width:0;background:var(--wheat)}
+.reset{margin-top:23px;padding:12px 28px;border:1px solid var(--brown);border-radius:12px;background:var(--brown);color:var(--wheat);cursor:pointer;font-size:14px;font-weight:600}
+.reset:hover{filter:brightness(1.15)}
+.help{text-align:center;color:var(--wheat);font-size:12px;line-height:1.7;margin-top:22px}
+kbd{border:1px solid var(--brown);border-bottom-width:3px;padding:2px 7px;border-radius:5px;color:var(--wheat);background:rgba(0,0,0,.3)}
+.live-dot{display:inline-block;width:8px;height:8px;background:var(--blue);border-radius:50%;margin-right:5px}.live-dot.off{background:var(--brown)}
+@media(max-width:400px){.stats{gap:8px}.panel{padding:19px}.stat{padding:13px 8px}}
 </style>
 </head>
 <body>
 <main class="app">
-<header class="top"><div class="eyebrow">Ferramenta musical</div><h1>Identificador de andamento</h1><p>Bata a pulsação na <strong>barra de espaço</strong> e descubra o andamento em tempo real.</p></header>
+<header class="top"><div class="eyebrow">Ferramenta musical</div><h1>Identificador de andamento</h1><p>Bata a pulsação na <strong>barra de espaço</strong> ou palmas/toques no <strong>microfone</strong> e descubra o andamento em tempo real.</p></header>
 <section class="panel" aria-label="Medidor de andamento">
 <div class="reading-label">Andamento detectado</div><div class="readout"><output class="number" id="bpm" aria-live="polite">—</output><span class="unit">BPM</span></div><div class="tempo" id="tempo">Aguardando suas primeiras batidas</div>
 <button class="pad" id="tap" type="button"><span class="pad-title">Toque aqui ou pressione ESPAÇO</span><small>Marque a pulsação com regularidade</small></button>
 <div class="stats"><div class="stat"><span>Batidas registradas</span><strong id="count">0</strong></div><div class="stat"><span>Regularidade</span><strong id="regularity">—</strong></div></div>
+<div class="options">
+<label class="opt"><input type="checkbox" id="metro-opt"> Metrônomo ao estabilizar</label>
+<button class="mic" id="mic" type="button" aria-pressed="false">🎤 Capturar pelo microfone</button>
+</div>
+<div class="meter" id="meter" aria-hidden="true"><i id="meter-fill"></i></div>
 <button class="reset" id="reset" type="button">↺ Reiniciar medição</button>
 </section>
-<footer class="help"><span class="live-dot off" id="status-dot"></span><span id="status">Pronto para medir</span><div style="margin-top:12px">Pressione <kbd>Espaço</kbd> repetidamente. Após uma pausa de 3 segundos, uma nova sequência é iniciada automaticamente.</div></footer>
+<footer class="help"><span class="live-dot off" id="status-dot"></span><span id="status">Pronto para medir</span><div style="margin-top:12px">Pressione <kbd>Espaço</kbd> repetidamente. Após uma pausa de 3 segundos, uma nova sequência é iniciada automaticamente. Com o metrônomo ativo, o clique começa quando o andamento fica estável.</div></footer>
 </main>
 <script>
 (()=>{
 'use strict';
-const $=id=>document.getElementById(id), bpm=$('bpm'),tempo=$('tempo'),count=$('count'),regularity=$('regularity'),pad=$('tap'),dot=$('status-dot'),status=$('status');
+const $=id=>document.getElementById(id), bpm=$('bpm'),tempo=$('tempo'),count=$('count'),regularity=$('regularity'),pad=$('tap'),dot=$('status-dot'),status=$('status'),metroOpt=$('metro-opt'),micBtn=$('mic'),meter=$('meter'),meterFill=$('meter-fill');
 let taps=[],lastEvent=0,flashTimer=null;
 const maxIntervals=8;
-function reset(){taps=[];lastEvent=0;bpm.textContent='—';tempo.textContent='Aguardando suas primeiras batidas';count.textContent='0';regularity.textContent='—';status.textContent='Pronto para medir';dot.classList.add('off');pad.classList.remove('active')}
+
+// ---- Metrônomo ----
+let actx=null,metro={on:false,bpm:0,next:0,timer:null},lastClick=0;
+function ctx(){if(!actx)actx=new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();return actx}
+function click(time){const c=ctx(),o=c.createOscillator(),g=c.createGain();o.frequency.value=1000;g.gain.setValueAtTime(.0001,time);g.gain.exponentialRampToValueAtTime(.6,time+.002);g.gain.exponentialRampToValueAtTime(.0001,time+.05);o.connect(g).connect(c.destination);o.start(time);o.stop(time+.06);lastClick=time}
+function schedule(){const c=ctx(),period=60/metro.bpm;while(metro.next<c.currentTime+.15){click(metro.next);metro.next+=period}}
+function startMetro(value,phaseDelayMs){
+  metro.bpm=value;
+  if(metro.on)return; // já tocando: apenas atualiza o andamento
+  metro.on=true;metro.next=ctx().currentTime+Math.max(.05,phaseDelayMs/1000);
+  schedule();metro.timer=setInterval(schedule,25);
+}
+function stopMetro(){metro.on=false;clearInterval(metro.timer)}
+
+// ---- Medição ----
+function reset(){stopMetro();taps=[];lastEvent=0;bpm.textContent='—';tempo.textContent='Aguardando suas primeiras batidas';count.textContent='0';regularity.textContent='—';status.textContent='Pronto para medir';dot.classList.add('off');pad.classList.remove('active')}
 function labelFor(value){if(value<40)return 'Muito lento';if(value<60)return 'Largo / Lento';if(value<76)return 'Adagio';if(value<108)return 'Andante';if(value<120)return 'Moderato';if(value<168)return 'Allegro';if(value<200)return 'Presto';return 'Prestissimo'}
 function measure(){const now=performance.now();if(lastEvent&&now-lastEvent<120)return;if(lastEvent&&now-lastEvent>3000)reset();taps.push(now);lastEvent=now;count.textContent=String(taps.length);status.textContent='Registrando batidas';dot.classList.remove('off');pad.classList.add('active');clearTimeout(flashTimer);flashTimer=setTimeout(()=>pad.classList.remove('active'),110);
 if(taps.length<2){tempo.textContent='Marque mais uma batida';return}
 const intervals=[];for(let i=Math.max(1,taps.length-maxIntervals);i<taps.length;i++)intervals.push(taps[i]-taps[i-1]);
-// Usa a média dos intervalos recentes para refletir o andamento executado.
 const avg=intervals.reduce((a,b)=>a+b,0)/intervals.length;const value=60000/avg;bpm.textContent=String(Math.round(value));tempo.textContent=labelFor(value);
 if(intervals.length<3){regularity.textContent='Calculando…';return}
 const variance=intervals.reduce((sum,x)=>sum+(x-avg)**2,0)/intervals.length;
 const cv=Math.sqrt(variance)/avg;
 regularity.textContent=cv<.05?'Muito estável':cv<.1?'Estável':cv<.18?'Variável':'Irregular';
-// Limita o histórico sem perder a contagem exibida (mantida até pausa/reinício).
+if(cv<.1&&intervals.length>=4){
+  if(metroOpt.checked){startMetro(value,avg);status.textContent='Andamento estável — metrônomo ativo'}
+}else if(metro.on){stopMetro();status.textContent='Andamento instável — metrônomo pausado'}
 if(taps.length>1000)taps=taps.slice(-maxIntervals-1);
 }
-document.addEventListener('keydown',event=>{if(event.code!=='Space'||event.repeat||event.altKey||event.ctrlKey||event.metaKey)return;const target=event.target;if(target instanceof HTMLElement&&target.matches('input,textarea,select,[contenteditable="true"]'))return;event.preventDefault();measure()});
+metroOpt.addEventListener('change',()=>{if(metroOpt.checked)ctx();else stopMetro()});
+document.addEventListener('keydown',event=>{if(event.code!=='Space'||event.repeat||event.altKey||event.ctrlKey||event.metaKey)return;const target=event.target;if(target instanceof HTMLElement&&target.matches('input,textarea,select,button,[contenteditable="true"]'))return;event.preventDefault();measure()});
 pad.addEventListener('pointerdown',event=>{if(event.pointerType!=='mouse'&&event.pointerType!=='touch'&&event.pointerType!=='pen')return;measure()});
-// Clique acionado por teclado (Enter) ou tecnologias assistivas.
 pad.addEventListener('click',event=>{if(event.detail===0)measure()});
 $('reset').addEventListener('click',reset);
+
+// ---- Microfone: detecção de batidas por aumento súbito de energia ----
+let mic=null;
+async function startMic(){
+  if(!navigator.mediaDevices?.getUserMedia){status.textContent='Microfone não suportado neste navegador';return}
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    const c=ctx(),src=c.createMediaStreamSource(stream),an=c.createAnalyser();an.fftSize=1024;src.connect(an);
+    const buf=new Float32Array(an.fftSize);let avg=0.01,prev=0,raf;
+    const loop=()=>{
+      an.getFloatTimeDomainData(buf);let s=0;for(const v of buf)s+=v*v;const rms=Math.sqrt(s/buf.length);
+      meterFill.style.width=Math.min(100,rms*400)+'%';
+      const nowT=c.currentTime,nearClick=nowT-lastClick<.12&&nowT>=lastClick-.02;
+      // Batida = nível acima da média móvel, com salto em relação ao quadro anterior.
+      if(rms>Math.max(.04,avg*2.5)&&rms>prev*1.3&&!nearClick)measure();
+      avg=avg*.95+rms*.05;prev=rms;raf=requestAnimationFrame(loop);
+    };
+    loop();mic={stream,src,stop(){cancelAnimationFrame(raf);stream.getTracks().forEach(t=>t.stop());src.disconnect()}};
+    micBtn.classList.add('on');micBtn.setAttribute('aria-pressed','true');micBtn.textContent='🎤 Ouvindo… (clique para parar)';meter.classList.add('show');status.textContent='Microfone ativo — bata palmas ou toque a pulsação';
+  }catch(e){status.textContent='Não foi possível acessar o microfone (permissão negada?)'}
+}
+function stopMic(){if(!mic)return;mic.stop();mic=null;micBtn.classList.remove('on');micBtn.setAttribute('aria-pressed','false');micBtn.textContent='🎤 Capturar pelo microfone';meter.classList.remove('show');meterFill.style.width='0'}
+micBtn.addEventListener('click',()=>mic?stopMic():startMic());
 })();
 </script>
 </body></html>
